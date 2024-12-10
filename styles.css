@@ -33,73 +33,83 @@ header p {
 
 /* Navegação */
 /* Estilos básicos do menu */
-nav {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-}
-
+/* Estilo padrão do menu (para dispositivos móveis) */
 .menu {
-    list-style: none;
-    display: flex; /* Para alinhar os itens horizontalmente */
-    flex-wrap: wrap; /* Evita estouro em telas pequenas */
-    gap: 15px; /* Espaço entre os itens */
-    justify-content: center; /* Centraliza os itens */
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none; /* Escondido inicialmente para hambúrguer */
+  flex-direction: column;
+  background-color: #333;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
 }
 
 .menu li {
-    display: inline; /* Itens alinhados na horizontal */
+  margin: 10px 0;
+  text-align: center;
 }
 
 .menu li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
 }
 
 .menu li a:hover {
-    text-decoration: underline;
+  background-color: #444;
 }
 
-/* Estilos para o menu hambúrguer */
+/* Exibição do menu no desktop */
+@media (min-width: 768px) {
+  .menu {
+    display: flex; /* Alterar para horizontal no desktop */
+    flex-direction: row;
+    justify-content: center;
+    position: static;
+    background-color: transparent;
+    width: auto;
+  }
+
+  .menu li {
+    margin: 0 10px;
+  }
+
+  .menu li a {
+    padding: 10px 15px;
+    color: #333; /* Cor do texto para desktop */
+    background-color: transparent;
+    border-radius: 5px;
+  }
+
+  .menu li a:hover {
+    background-color: #007BFF;
+    color: white;
+  }
+
+  /* Esconder o botão hambúrguer no desktop */
+  .hamburger {
+    display: none;
+  }
+}
+
+/* Botão hambúrguer padrão (para dispositivos móveis) */
 .hamburger {
-    display: none; /* Esconde o hambúrguer em telas maiores */
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
+  display: block;
+  cursor: pointer;
+  margin: 0 auto;
 }
 
 .hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: white;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-    .menu {
-        display: none; /* Esconde o menu horizontal */
-        flex-direction: column;
-        background-color: #333;
-        width: 100%;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        padding: 10px 0;
-    }
-
-    .menu.active {
-        display: flex; /* Mostra o menu quando o botão é clicado */
-    }
-
-    .hamburger {
-        display: flex; /* Exibe o botão hambúrguer */
-    }
-}
-
-}
 
 /* Main Content */
 main {
