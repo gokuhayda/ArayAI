@@ -180,7 +180,6 @@ form button:hover {
 }
 
 /* Botão do WhatsApp */
-/* Botão do WhatsApp */
 #whatsapp-button {
     position: fixed;
     bottom: 20px;
@@ -393,65 +392,67 @@ form button:hover {
 }
 /* Chatbot */
 .chatbot {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  max-height: 400px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
 }
 
 #chat-header {
-  background-color: #007bff;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  text-align: center;
-  font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
 }
 
 #chat-body {
-  display: none; /* Inicialmente escondido */
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: none; /* Inicialmente escondido */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #chat-messages {
-  flex-grow: 1;
-  overflow-y: auto;
-  max-height: 300px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  background: #f9f9f9;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 300px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #f9f9f9;
 }
 
 #chat-input {
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 5px;
-  flex-grow: 1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    flex-grow: 1;
 }
 
 #chat-send {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 #chat-send:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
+
+
 
 /* Formulário com feedback visual */
 input:focus, textarea:focus {
