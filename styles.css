@@ -391,20 +391,51 @@ form button:hover {
     transform: scale(1.05);
 }
 /* Chatbot */
-#chatbot-container {
-    display: block; /* Garante que o chatbot apareça */
+/* Botão Minimizado */
+#chatbot-toggle {
     position: fixed;
-    bottom: 20px; /* Mantém o chatbot próximo ao rodapé */
-    left: 20px; /* Alinha o chatbot no lado esquerdo */
-    width: 300px; /* Largura do chatbot */
-    max-height: 400px; /* Altura máxima */
-    background: white; /* Fundo branco */
-    border: 1px solid #ddd; /* Borda leve */
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    overflow: hidden; /* Impede o overflow */
-    font-family: Arial, sans-serif; /* Fonte padrão */
-    z-index: 1000; /* Garante que o chatbot esteja acima de outros elementos */
+    bottom: 20px;
+    left: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000; /* Sobrepõe outros elementos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Chatbot Container Oculto */
+#chatbot-container {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 300px;
+    max-height: 400px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+}
+
+/* Chat Header */
+#chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
