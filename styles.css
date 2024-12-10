@@ -407,6 +407,13 @@ form button:hover {
     z-index: 1000; /* Garante que o chatbot esteja acima de outros elementos */
 }
 
+@media (max-width: 768px) {
+    #chatbot-container {
+        bottom: 10px; /* Ajuste para telas pequenas */
+        left: 10px; /* Mantém alinhado à esquerda */
+        width: 90%; /* Ocupar quase toda a largura */
+    }
+}
 
 #chat-header {
     background-color: #007bff;
