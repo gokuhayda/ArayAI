@@ -29,10 +29,11 @@
 
     <!-- Navigation -->
     <nav>
-        <div aria-label="breadcrumb">
-            <a href="index.html">Início</a> > <span>Index</span>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <ul class="menu">
             <li><a href="index.html">🏠 Início</a></li>
             <li><a href="competency_mapping.html">📊 Mapeamento de Competências</a></li>
@@ -44,6 +45,13 @@
             <li><a href="contact.html">📞 Contato</a></li>
         </ul>
     </nav>
+    
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector(".menu");
+            menu.classList.toggle("active");
+        }
+    </script>
 
     <!-- Main Content -->
     <main>
