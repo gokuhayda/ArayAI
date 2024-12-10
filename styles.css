@@ -391,7 +391,8 @@ form button:hover {
     transform: scale(1.05);
 }
 /* Chatbot */
-.chatbot {
+#chatbot-container {
+    display: block; /* Garantir que apareça por padrão */
     position: fixed;
     bottom: 20px;
     right: 20px;
