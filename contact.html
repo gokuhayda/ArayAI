@@ -36,46 +36,7 @@
     </nav>
 
     <main>
-        <form id="contact-form">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
-
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" placeholder="seuemail@dominio.com" required>
-
-            <label for="phone">Telefone:</label>
-            <input 
-                type="tel" 
-                id="phone" 
-                name="phone" 
-                placeholder="+55 (DDD) 00000-0000" 
-                value="+55" 
-                required
-                title="Digite o número no formato internacional, como +55 (DDD) 00000-0000.">
-            
-            <label for="service">Serviço de Interesse:</label>
-            <select id="service" name="service" required>
-                <option value="">Selecione um serviço</option>
-                <option value="data_science">Consultoria em Ciência de Dados</option>
-                <option value="competency_mapping">Mapeamento de Competências</option>
-                <option value="machine_learning">Soluções de Machine Learning</option>
-                <option value="generative_models">Modelos Generativos</option>
-                <option value="process_optimization">Otimização de Processos</option>
-                <option value="business_analytics">Análises de Negócios</option>
-                <option value="training">Treinamentos e Workshops</option>
-                <option value="custom_solutions">Soluções Personalizadas</option>
-                <option value="ai_strategy">Estratégias de Inteligência Artificial</option>
-                <option value="data_visualization">Visualização de Dados</option>
-                <option value="predictive_models">Modelos Preditivos</option>
-                <option value="big_data">Consultoria em Big Data</option>
-                <option value="data_governance">Governança de Dados</option>
-            </select>
-
-            <label for="message">Mensagem:</label>
-            <textarea id="message" name="message" rows="4" placeholder="Digite sua mensagem aqui" required></textarea>
-
-            <button type="submit">Enviar</button>
-        </form>
+        
     </main>
 
     <!-- Botão do WhatsApp -->
@@ -87,41 +48,9 @@
         <p>© 2024 NextGen Analytics Solutions. Todos os direitos reservados.</p>
     </footer>
 
-    <script>
-        function toggleMenu() {
-            document.querySelector(".menu").classList.toggle("active");
-        }
-
-        document.getElementById("phone").addEventListener("input", function () {
-            const phone = this.value.replace(/\D/g, ""); // Remove tudo que não for dígito
-            const startsWithPlus = this.value.startsWith("+"); // Verifica se começa com +
-            const isRepeated = /^(\d)\1+$/.test(phone); // Verifica se todos os números são iguais
-            const minLength = 10; // Mínimo de 10 números para DDD + telefone
-
-            if (startsWithPlus && phone.length >= minLength && !isRepeated) {
-                this.setCustomValidity(""); // Limpa erro de validação
-            } else {
-                this.setCustomValidity("Digite um número válido no formato internacional (ex.: +55 DDD 00000-0000) e sem todos os números repetidos.");
-            }
-        });
-
-        document.getElementById("contact-form").addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            emailjs.sendForm("service_t5k235z", "template_4nn4a3g", this)
-                .then(() => {
-                    alert("Mensagem enviada com sucesso!");
-                    this.reset(); // Limpa o formulário após o envio bem-sucedido
-                })
-                .catch(error => {
-                    alert("Erro ao enviar mensagem. Tente novamente.");
-                    console.error("Erro:", error);
-                });
-        });
-    </script>
 
 <!-- Scripts -->
 <script src="chatbot.js"></script>
-    
+<script src="static/js/contact_form.js"></script>    
 </body>
 </html>
