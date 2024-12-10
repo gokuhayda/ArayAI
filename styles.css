@@ -412,6 +412,26 @@ form button:hover {
 }
 
 /* Chatbot Container Oculto */
+#chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000; /* Sobrepõe outros elementos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Chatbot Container Oculto */
 #chatbot-container {
     display: none; /* Oculto por padrão */
     position: fixed;
