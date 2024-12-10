@@ -125,23 +125,16 @@
         </ul>
     </footer>
 
-    <!-- Estrutura do Chatbot -->
-    <div id="chatbot-container" class="chatbot">
-        <div id="chat-header" onclick="toggleChat(){
+    <script>
+        function toggleChatbot() {
             const container = document.getElementById('chatbot-container');
             container.style.display = container.style.display === 'none' || container.style.display === '' ? 'block' : 'none';
         }
-">🤖 Precisa de ajuda?</div>
-        <div id="chat-body">
-            <div id="chat-messages"></div>
-            <input id="chat-input" type="text" placeholder="Digite sua mensagem...">
-            <button id="chat-send" onclick="sendMessage()">Enviar</button>
-        </div>
-    </div>
 
-    <!-- Scripts -->
-    <script src="chatbot.js"></script>
-</body>
-</html>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
