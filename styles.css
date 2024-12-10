@@ -32,63 +32,73 @@ header p {
 }
 
 /* Navegação */
+/* Estilos básicos do menu */
 nav {
-    background-color: #0056b3;
+    background-color: #333;
     color: white;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 10px;
 }
 
-nav .menu {
+.menu {
     list-style: none;
-    margin: 0;
+    display: flex; /* Para alinhar os itens horizontalmente */
+    flex-wrap: wrap; /* Evita estouro em telas pequenas */
+    gap: 15px; /* Espaço entre os itens */
+    justify-content: center; /* Centraliza os itens */
     padding: 0;
-    display: flex;
+    margin: 0;
 }
 
-nav .menu li {
-    margin: 0 10px;
+.menu li {
+    display: inline; /* Itens alinhados na horizontal */
 }
 
-nav .menu a {
+.menu li a {
+    color: white;
     text-decoration: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    font-size: 1rem;
 }
 
-nav .menu a:hover {
-    background-color: #004494;
+.menu li a:hover {
+    text-decoration: underline;
 }
 
-.menu-toggle {
-    display: none;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
+/* Estilos para o menu hambúrguer */
+.hamburger {
+    display: none; /* Esconde o hambúrguer em telas maiores */
+    flex-direction: column;
+    gap: 5px;
     cursor: pointer;
 }
 
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+}
+
+/* Responsividade para telas menores */
 @media (max-width: 768px) {
-    nav .menu {
+    .menu {
+        display: none; /* Esconde o menu horizontal */
         flex-direction: column;
-        display: none;
-    }
-
-    nav .menu.active {
-        display: flex;
-    }
-
-    .menu-toggle {
-        display: block;
+        background-color: #333;
+        width: 100%;
         position: absolute;
-        top: 15px;
-        right: 15px;
+        top: 50px;
+        left: 0;
+        padding: 10px 0;
     }
+
+    .menu.active {
+        display: flex; /* Mostra o menu quando o botão é clicado */
+    }
+
+    .hamburger {
+        display: flex; /* Exibe o botão hambúrguer */
+    }
+}
+
 }
 
 /* Main Content */
