@@ -317,33 +317,34 @@ footer .social-links a:hover {
 /* Estilo do contêiner do letreiro */
 .letreiro-container {
     position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 40px; /* Ajuste conforme necessário */
-    background-color: #0056b3; /* Azul do fundo */
+    overflow: hidden; /* Esconde texto fora da área visível */
+    width: 100%; /* Ocupa toda a largura */
+    height: 40px; /* Altura ajustável */
+    background-color: #0056b3; /* Cor de fundo azul */
     display: flex;
     align-items: center;
 }
 
-/* Estilo do texto do fluxo de dados */
+/* Letreiro (fluxo de dados) */
 .letreiro {
     display: flex;
-    gap: 20px; /* Espaço entre os blocos de dados */
-    animation: moveLetreiro 10s linear infinite;
+    gap: 40px; /* Espaçamento entre os blocos de texto */
+    animation: moveFluxo 10s linear infinite; /* Movimento contínuo */
 }
 
-.fluxo-dados {
+/* Estilo do texto */
+.letreiro span {
     white-space: nowrap;
-    font-size: 16px;
-    color: white;
+    font-size: 18px; /* Tamanho do texto */
+    color: white; /* Cor do texto */
 }
 
-/* Animação do fluxo de dados */
-@keyframes moveLetreiro {
+/* Animação do letreiro */
+@keyframes moveFluxo {
     from {
-        transform: translateX(100%);
+        transform: translateX(100%); /* Começa fora da tela à direita */
     }
     to {
-        transform: translateX(-100%);
+        transform: translateX(-100%); /* Sai da tela pela esquerda */
     }
 }
