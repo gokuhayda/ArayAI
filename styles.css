@@ -328,7 +328,7 @@ footer .social-links a:hover {
     display: inline-block;
     white-space: nowrap;
     position: absolute;
-    animation: moveLetreiro 30s linear infinite; /* Duração ajustável */
+    animation: moveLetreiro 0.3s linear infinite; /* Duração ajustável */
     font-size: 14px;
     color: #007bff; /* Azul moderno */
     font-weight: bold;
