@@ -320,24 +320,28 @@ footer .social-links a:hover {
     background-color: #333;
     color: white;
     padding: 10px;
+    overflow: hidden;
 }
 
 .letreiro-container {
     flex-grow: 1;
     overflow: hidden;
     white-space: nowrap;
-}
-
-.letreiro {
-    animation: scroll 40s linear infinite;
+    display: flex;
+    align-items: center;
 }
 
 .letreiro ul {
-    display: inline-flex;
-    gap: 20px;
-    list-style: none;
+    display: flex;
+    gap: 30px;
     padding: 0;
     margin: 0;
+    list-style: none;
+    animation: scroll 30s linear infinite;
+}
+
+.letreiro li {
+    display: inline-block;
 }
 
 .letreiro li a {
