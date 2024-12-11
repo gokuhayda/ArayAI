@@ -57,10 +57,14 @@ header p {
     cursor: pointer;
     background: none;
     border: none;
-    color: #007bff;
+    color: #0056b3; /* Cor azul visível */
     z-index: 1001;
+    transition: color 0.3s ease;
 }
 
+.menu-toggle:hover {
+    color: #003f7f; /* Cor mais escura no hover */
+}
 /* Menu Responsivo */
 .menu {
     display: none;
