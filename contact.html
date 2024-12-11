@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato - NextGen Analytics Solutions</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts: Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function () {
@@ -36,21 +33,53 @@
     </nav>
 
     <main>
-        
+        <form id="contact-form">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="seuemail@dominio.com" required>
+
+            <label for="phone">Telefone (Opcional):</label>
+            <input type="tel" id="phone" name="phone" placeholder="(DDD) 00000-0000" pattern="^\d{2} \d{4,5}-\d{4}$">
+
+            <label for="service">Serviço de Interesse:</label>
+            <select id="service" name="service" required>
+                <option value="">Selecione um serviço</option>
+                <option value="data_science">Consultoria em Ciência de Dados</option>
+                <option value="competency_mapping">Mapeamento de Competências</option>
+            </select>
+
+            <label for="message">Mensagem:</label>
+            <textarea id="message" name="message" rows="4" placeholder="Digite sua mensagem aqui" required></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
     </main>
 
-    <!-- Botão do WhatsApp -->
-    <a href="https://api.whatsapp.com/send?phone=5541995484812&text=Oi, visitei o site e gostaria de saber mais sobre a NextGen Analytics Solutions" id="whatsapp-button" target="_blank" title="Fale Conosco pelo WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-   </a>
-    
     <footer>
         <p>© 2024 NextGen Analytics Solutions. Todos os direitos reservados.</p>
+        <a href="https://api.whatsapp.com/send?phone=5541995484812&text=Oi" class="whatsapp-button">Fale conosco no WhatsApp</a>
     </footer>
 
+    <script>
+        function toggleMenu() {
+            document.querySelector(".menu").classList.toggle("active");
+        }
 
-<!-- Scripts -->
-<script src="chatbot.js"></script>
-<script src="static/js/contact_form.js"></script>    
+        document.getElementById("contact-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            emailjs.sendForm("service_t5k235z", "template_4nn4a3g", this)
+                .then(() => {
+                    alert("Mensagem enviada com sucesso!");
+                    this.reset(); // Limpa o formulário após o envio bem-sucedido
+                })
+                .catch(error => {
+                    alert("Erro ao enviar mensagem. Tente novamente.");
+                    console.error("Erro:", error);
+                });
+        });
+    </script>
 </body>
 </html>
