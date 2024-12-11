@@ -327,25 +327,18 @@ footer .social-links a:hover {
 .letreiro {
     display: inline-block;
     white-space: nowrap;
-    position: absolute;
-    animation: moveLetreiro 0.3s linear infinite; /* Duração ajustável */
+    animation: moveLetreiro 15s linear infinite; /* Ajuste o tempo para controlar a velocidade */
     font-size: 14px;
     color: #007bff; /* Azul moderno */
     font-weight: bold;
 }
 
-/* Animação ajustada */
+/* Animação do letreiro contínuo */
 @keyframes moveLetreiro {
-    0% {
-        transform: translateX(100%); /* Começa fora da tela à direita */
+    from {
+        transform: translateX(0); /* Começa visível */
     }
-    25% {
-        transform: translateX(0%); /* Texto completamente visível */
-    }
-    75% {
-        transform: translateX(-100%); /* Última letra no centro da tela */
-    }
-    100% {
-        transform: translateX(-100%); /* Reinicia o ciclo */
+    to {
+        transform: translateX(-100%); /* Sai completamente da tela */
     }
 }
