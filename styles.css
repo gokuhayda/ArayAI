@@ -328,7 +328,7 @@ footer .social-links a:hover {
 /* Texto do letreiro */
 .letreiro {
     display: flex;
-    animation: carregandoFluxo 8s linear infinite; /* Movimento contínuo */
+    animation: carregandoFluxo 25s linear infinite; /* Movimento contínuo */
 }
 
 .letreiro span {
