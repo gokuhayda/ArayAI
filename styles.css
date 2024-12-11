@@ -329,7 +329,7 @@ footer .social-links a:hover {
 .letreiro {
     display: flex;
     gap: 40px; /* Espaçamento entre os blocos de texto */
-    animation: moveFluxo 10s linear infinite; /* Movimento contínuo */
+    animation: moveFluxo 3s linear infinite; /* Movimento contínuo */
 }
 
 /* Estilo do texto */
