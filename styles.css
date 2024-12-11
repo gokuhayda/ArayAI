@@ -313,16 +313,14 @@ footer .social-links a {
 footer .social-links a:hover {
     color: #0056b3;
 }
+
 /* Estilo do contêiner do letreiro */
 .letreiro-container {
-    width: 100%;
-    overflow: hidden;
-    background-color: transparent; /* Transparente para combinar com o fundo */
-    color: #007bff; /* Azul para se destacar */
-    font-size: 16px;
-    font-weight: bold;
-    padding: 5px 0;
     position: relative;
+    overflow: hidden;
+    width: 100%; /* O letreiro ocupa toda a largura */
+    height: 20px; /* Altura do texto */
+    background-color: transparent; /* Transparente ou defina uma cor */
 }
 
 /* Estilo do texto do letreiro */
@@ -330,7 +328,10 @@ footer .social-links a:hover {
     display: inline-block;
     white-space: nowrap;
     position: absolute;
-    animation: moveLetreiro 5s linear infinite;
+    animation: moveLetreiro 10s linear infinite;
+    font-size: 14px; /* Tamanho do texto */
+    color: #007bff; /* Cor do texto */
+    font-weight: bold;
 }
 
 /* Animação do letreiro */
