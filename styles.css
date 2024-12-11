@@ -337,7 +337,7 @@ footer .social-links a:hover {
     padding: 0;
     margin: 0;
     list-style: none;
-    animation: scroll 15s linear infinite;
+    animation: scroll 5s linear infinite;
 }
 
 .letreiro li {
