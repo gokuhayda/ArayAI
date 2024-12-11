@@ -314,36 +314,51 @@ footer .social-links a:hover {
     color: #0056b3;
 }
 
-/* Contêiner do letreiro */
-.letreiro-container {
-    position: relative;
-    overflow: hidden; /* Esconde o texto fora da área visível */
-    width: 100%; /* Ocupa toda a largura */
-    height: 40px; /* Ajusta a altura do contêiner */
-    background-color: #0056b3; /* Fundo azul */
+.breadcrumb-mobile {
     display: flex;
     align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px;
 }
 
-/* Texto do letreiro */
+.letreiro-container {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .letreiro {
+    animation: scroll 15s linear infinite;
+}
+
+.letreiro ul {
+    display: inline-flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.letreiro li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
     display: flex;
-    animation: carregandoFluxo 80s linear infinite; /* Movimento contínuo */
+    align-items: center;
+    gap: 5px;
 }
 
-.letreiro span {
-    white-space: nowrap; /* Evita quebra de linha */
-    font-size: 18px; /* Tamanho do texto */
-    color: white; /* Cor branca para contraste */
-    margin-right: 30px; /* Espaçamento entre blocos */
+.letreiro li a:hover {
+    text-decoration: underline;
 }
 
-/* Animação do fluxo */
-@keyframes carregandoFluxo {
+/* Animação do letreiro */
+@keyframes scroll {
     from {
-        transform: translateX(100%); /* Começa fora da tela à direita */
+        transform: translateX(100%);
     }
     to {
-        transform: translateX(-100%); /* Sai pela esquerda */
+        transform: translateX(-100%);
     }
 }
