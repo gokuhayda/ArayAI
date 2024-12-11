@@ -314,7 +314,7 @@ footer .social-links a:hover {
     color: #0056b3;
 }
 
-.breadcrumb {
+.breadcrumb-mobile {
     display: flex;
     align-items: center;
     background-color: #333;
