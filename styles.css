@@ -63,7 +63,7 @@ header p {
 }
 
 .menu-toggle:hover {
-    color: #003f7f; /* Cor mais escura no hover */
+    color: #f0f4ff; /* Cor mais escura no hover */
 }
 /* Menu Responsivo */
 .menu {
