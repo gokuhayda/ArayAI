@@ -25,20 +25,54 @@ async function sendMessageToBot(userMessage) {
     }
 }
 
-// Cria a interface gráfica do chatbot
+// Função para criar a caixinha flutuante
+function createFloatingChatbox() {
+    const chatIconContainer = document.createElement("div");
+    chatIconContainer.id = "chatIconContainer";
+    chatIconContainer.style.position = "fixed";
+    chatIconContainer.style.bottom = "20px";
+    chatIconContainer.style.right = "20px";
+    chatIconContainer.style.width = "60px";
+    chatIconContainer.style.height = "60px";
+    chatIconContainer.style.borderRadius = "50%";
+    chatIconContainer.style.backgroundColor = "#0078d7";
+    chatIconContainer.style.display = "flex";
+    chatIconContainer.style.justifyContent = "center";
+    chatIconContainer.style.alignItems = "center";
+    chatIconContainer.style.cursor = "pointer";
+    chatIconContainer.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
+    chatIconContainer.style.zIndex = "1000";
+
+    const chatIcon = document.createElement("img");
+    chatIcon.src = "https://via.placeholder.com/40x40?text=🤖"; // Substitua pelo ícone do robô
+    chatIcon.alt = "Chatbot";
+    chatIcon.style.width = "40px";
+    chatIcon.style.height = "40px";
+
+    chatIconContainer.appendChild(chatIcon);
+    document.body.appendChild(chatIconContainer);
+
+    chatIconContainer.addEventListener("click", toggleChatUI);
+}
+
+// Função para criar a interface de chat
 function createChatbotUI() {
     const chatbotContainer = document.createElement("div");
     chatbotContainer.id = "chatbotContainer";
+    chatbotContainer.style.position = "fixed";
+    chatbotContainer.style.bottom = "100px";
+    chatbotContainer.style.right = "20px";
     chatbotContainer.style.width = "400px";
     chatbotContainer.style.height = "600px";
     chatbotContainer.style.border = "2px solid #0078d7";
     chatbotContainer.style.borderRadius = "10px";
     chatbotContainer.style.overflow = "hidden";
-    chatbotContainer.style.display = "flex";
+    chatbotContainer.style.display = "none";
     chatbotContainer.style.flexDirection = "column";
     chatbotContainer.style.backgroundColor = "#f4f4f9";
     chatbotContainer.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
     chatbotContainer.style.fontFamily = "Arial, sans-serif";
+    chatbotContainer.style.zIndex = "1000";
 
     const chatHeader = document.createElement("div");
     chatHeader.style.backgroundColor = "#0078d7";
@@ -101,7 +135,13 @@ function createChatbotUI() {
     document.body.appendChild(chatbotContainer);
 }
 
-// Função para exibir a resposta do bot na interface
+// Função para alternar a exibição da interface de chat
+function toggleChatUI() {
+    const chatbotContainer = document.getElementById("chatbotContainer");
+    chatbotContainer.style.display = chatbotContainer.style.display === "none" ? "flex" : "none";
+}
+
+// Função para exibir a resposta do bot
 function displayBotResponse(response) {
     const chatContainer = document.getElementById("chatContainer");
     const botMessage = document.createElement("div");
@@ -147,7 +187,8 @@ async function handleSendMessage() {
     displayBotResponse(botResponse);
 }
 
-// Inicializar a interface do chatbot
+// Inicializar a interface flutuante e o chatbot
+createFloatingChatbox();
 createChatbotUI();
 
 // Adicionar eventos aos elementos
