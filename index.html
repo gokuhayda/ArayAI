@@ -28,13 +28,14 @@
     </header>
 
     <!-- Navigation -->
-    <div aria-label="breadcrumb">
-        <a href="index.html">Início</a> > <span>Página Principal</span>
-    </div>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-<nav class="menu">
-    <ul>
-        <li><a href="index.html">🏠 Início</a></li>
+<!-- Navigation -->
+<div aria-label="breadcrumb" class="breadcrumb-mobile">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <span class="breadcrumb-text">Início > Página Principal</span>
+</div>
+<nav>
+    <ul class="menu">
+        <li><a href="index.html">🏠 Página Inicial</a></li>
         <li><a href="competency_mapping.html">📊 Mapeamento de Competências</a></li>
         <li><a href="process_optimization.html">⚙️ Otimização de Processos</a></li>
         <li><a href="data_science_consulting.html">📈 Consultoria em Ciência de Dados</a></li>
@@ -44,14 +45,6 @@
         <li><a href="contact.html">📞 Contato</a></li>
     </ul>
 </nav>
-
-<script>
-    function toggleMenu() {
-        const menu = document.querySelector(".menu");
-        menu.classList.toggle("active");
-    }
-</script>
-    </nav>
     
     <script>
         function toggleMenu() {
