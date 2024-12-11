@@ -360,7 +360,7 @@ footer .social-links a:hover {
 /* Animação do letreiro */
 @keyframes scroll {
     from {
-        transform: translateX(80%); /* Começa fora da tela */
+        transform: translateX(0%); /* Começa fora da tela */
     }
     to {
         transform: translateX(-100%); /* Rola até desaparecer */
