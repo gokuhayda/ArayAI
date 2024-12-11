@@ -339,6 +339,6 @@ footer .social-links a:hover {
         transform: translateX(0); /* Começa visível */
     }
     to {
-        transform: translateX(-90%); /* Sai completamente da tela */
+        transform: translateX(-100%); /* Sai completamente da tela */
     }
 }
