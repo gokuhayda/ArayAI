@@ -1,200 +1,136 @@
-// URL do backend do chatbot no Render
-const backendUrl = "https://chatbot-backend-zduj.onrender.com/api/chat";
+document.addEventListener("DOMContentLoaded", function () {
+    // Cria o botão flutuante para o chatbot
+    const chatbotButton = document.createElement("div");
+    chatbotButton.id = "chatbot-button";
+    chatbotButton.style.position = "fixed";
+    chatbotButton.style.left = "20px";
+    chatbotButton.style.bottom = "20px";
+    chatbotButton.style.width = "60px";
+    chatbotButton.style.height = "60px";
+    chatbotButton.style.borderRadius = "50%";
+    chatbotButton.style.backgroundColor = "#007bff";
+    chatbotButton.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)";
+    chatbotButton.style.cursor = "pointer";
+    chatbotButton.style.display = "flex";
+    chatbotButton.style.alignItems = "center";
+    chatbotButton.style.justifyContent = "center";
+    chatbotButton.style.zIndex = "1000";
 
-// Função para enviar mensagem do usuário para o backend
-async function sendMessageToBot(userMessage) {
-    try {
-        const response = await fetch(backendUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user_message: userMessage }),
-        });
+    // Ícone do robô no botão
+    const chatbotIcon = document.createElement("img");
+    chatbotIcon.src = "https://cdn-icons-png.flaticon.com/512/4712/4712027.png"; // Substitua pela URL do ícone desejado
+    chatbotIcon.alt = "Chatbot";
+    chatbotIcon.style.width = "40px";
+    chatbotIcon.style.height = "40px";
+    chatbotButton.appendChild(chatbotIcon);
 
-        if (response.ok) {
-            const data = await response.json();
-            return data.response; // Retorna a resposta do bot
-        } else {
-            console.error("Erro ao se comunicar com o backend:", response.status);
-            return "Desculpe, não foi possível processar sua solicitação.";
-        }
-    } catch (error) {
-        console.error("Erro de rede:", error);
-        return "Erro ao se comunicar com o servidor. Por favor, tente novamente mais tarde.";
-    }
-}
+    // Adiciona o botão ao corpo da página
+    document.body.appendChild(chatbotButton);
 
-// Função para criar a caixinha flutuante
-function createFloatingChatbox() {
-    const chatIconContainer = document.createElement("div");
-    chatIconContainer.id = "chatIconContainer";
-    chatIconContainer.style.position = "fixed";
-    chatIconContainer.style.bottom = "20px";
-    chatIconContainer.style.right = "20px";
-    chatIconContainer.style.width = "60px";
-    chatIconContainer.style.height = "60px";
-    chatIconContainer.style.borderRadius = "50%";
-    chatIconContainer.style.backgroundColor = "#0078d7";
-    chatIconContainer.style.display = "flex";
-    chatIconContainer.style.justifyContent = "center";
-    chatIconContainer.style.alignItems = "center";
-    chatIconContainer.style.cursor = "pointer";
-    chatIconContainer.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
-    chatIconContainer.style.zIndex = "1000";
+    // Cria a janela de chat
+    const chatWindow = document.createElement("div");
+    chatWindow.id = "chat-window";
+    chatWindow.style.position = "fixed";
+    chatWindow.style.left = "20px";
+    chatWindow.style.bottom = "90px";
+    chatWindow.style.width = "300px";
+    chatWindow.style.height = "400px";
+    chatWindow.style.backgroundColor = "#fff";
+    chatWindow.style.border = "1px solid #ccc";
+    chatWindow.style.borderRadius = "8px";
+    chatWindow.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)";
+    chatWindow.style.display = "none";
+    chatWindow.style.zIndex = "1000";
 
-    const chatIcon = document.createElement("img");
-    chatIcon.src = "https://via.placeholder.com/40x40?text=🤖"; // Substitua pelo ícone do robô
-    chatIcon.alt = "Chatbot";
-    chatIcon.style.width = "40px";
-    chatIcon.style.height = "40px";
-
-    chatIconContainer.appendChild(chatIcon);
-    document.body.appendChild(chatIconContainer);
-
-    chatIconContainer.addEventListener("click", toggleChatUI);
-}
-
-// Função para criar a interface de chat
-function createChatbotUI() {
-    const chatbotContainer = document.createElement("div");
-    chatbotContainer.id = "chatbotContainer";
-    chatbotContainer.style.position = "fixed";
-    chatbotContainer.style.bottom = "100px";
-    chatbotContainer.style.right = "20px";
-    chatbotContainer.style.width = "400px";
-    chatbotContainer.style.height = "600px";
-    chatbotContainer.style.border = "2px solid #0078d7";
-    chatbotContainer.style.borderRadius = "10px";
-    chatbotContainer.style.overflow = "hidden";
-    chatbotContainer.style.display = "none";
-    chatbotContainer.style.flexDirection = "column";
-    chatbotContainer.style.backgroundColor = "#f4f4f9";
-    chatbotContainer.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
-    chatbotContainer.style.fontFamily = "Arial, sans-serif";
-    chatbotContainer.style.zIndex = "1000";
-
+    // Cabeçalho do chat
     const chatHeader = document.createElement("div");
-    chatHeader.style.backgroundColor = "#0078d7";
+    chatHeader.style.backgroundColor = "#007bff";
     chatHeader.style.color = "#fff";
     chatHeader.style.padding = "10px";
-    chatHeader.style.textAlign = "center";
-    chatHeader.style.fontWeight = "bold";
-    chatHeader.textContent = "Chatbot";
+    chatHeader.style.borderTopLeftRadius = "8px";
+    chatHeader.style.borderTopRightRadius = "8px";
+    chatHeader.style.display = "flex";
+    chatHeader.style.justifyContent = "space-between";
+    chatHeader.style.alignItems = "center";
 
-    const chatContainer = document.createElement("div");
-    chatContainer.id = "chatContainer";
-    chatContainer.style.flexGrow = "1";
-    chatContainer.style.padding = "10px";
-    chatContainer.style.overflowY = "auto";
-    chatContainer.style.backgroundColor = "#e9ecef";
+    const chatTitle = document.createElement("span");
+    chatTitle.textContent = "Assistente Virtual";
+    chatTitle.style.fontWeight = "bold";
 
+    const closeChat = document.createElement("span");
+    closeChat.textContent = "✖";
+    closeChat.style.cursor = "pointer";
+
+    chatHeader.appendChild(chatTitle);
+    chatHeader.appendChild(closeChat);
+    chatWindow.appendChild(chatHeader);
+
+    // Corpo do chat
+    const chatBody = document.createElement("div");
+    chatBody.style.flex = "1";
+    chatBody.style.padding = "10px";
+    chatBody.style.overflowY = "auto";
+    chatBody.style.height = "300px";
+    chatBody.innerHTML = `<p>Bem-vindo! Como posso ajudá-lo?</p>`;
+    chatWindow.appendChild(chatBody);
+
+    // Campo de entrada
     const chatInputContainer = document.createElement("div");
-    chatInputContainer.style.display = "flex";
-    chatInputContainer.style.borderTop = "1px solid #ccc";
     chatInputContainer.style.padding = "10px";
-    chatInputContainer.style.backgroundColor = "#fff";
+    chatInputContainer.style.borderTop = "1px solid #ccc";
 
-    const userInput = document.createElement("input");
-    userInput.id = "userInput";
-    userInput.type = "text";
-    userInput.placeholder = "Digite sua mensagem...";
-    userInput.style.flexGrow = "1";
-    userInput.style.border = "1px solid #ccc";
-    userInput.style.borderRadius = "5px";
-    userInput.style.padding = "10px";
-    userInput.style.marginRight = "10px";
-    userInput.style.fontSize = "14px";
+    const chatInput = document.createElement("input");
+    chatInput.type = "text";
+    chatInput.placeholder = "Digite sua mensagem...";
+    chatInput.style.width = "calc(100% - 50px)";
+    chatInput.style.padding = "5px";
+    chatInput.style.marginRight = "10px";
+    chatInput.style.border = "1px solid #ccc";
+    chatInput.style.borderRadius = "4px";
 
     const sendButton = document.createElement("button");
-    sendButton.id = "sendButton";
     sendButton.textContent = "Enviar";
-    sendButton.style.backgroundColor = "#0078d7";
+    sendButton.style.padding = "5px 10px";
+    sendButton.style.backgroundColor = "#007bff";
     sendButton.style.color = "#fff";
     sendButton.style.border = "none";
-    sendButton.style.borderRadius = "5px";
-    sendButton.style.padding = "10px 15px";
+    sendButton.style.borderRadius = "4px";
     sendButton.style.cursor = "pointer";
-    sendButton.style.fontSize = "14px";
 
-    sendButton.addEventListener("mouseenter", () => {
-        sendButton.style.backgroundColor = "#005bb5";
-    });
-
-    sendButton.addEventListener("mouseleave", () => {
-        sendButton.style.backgroundColor = "#0078d7";
-    });
-
-    chatInputContainer.appendChild(userInput);
+    chatInputContainer.appendChild(chatInput);
     chatInputContainer.appendChild(sendButton);
+    chatWindow.appendChild(chatInputContainer);
 
-    chatbotContainer.appendChild(chatHeader);
-    chatbotContainer.appendChild(chatContainer);
-    chatbotContainer.appendChild(chatInputContainer);
+    // Adiciona a janela de chat ao corpo
+    document.body.appendChild(chatWindow);
 
-    document.body.appendChild(chatbotContainer);
-}
+    // Lógica de abertura e fechamento
+    chatbotButton.addEventListener("click", () => {
+        chatWindow.style.display = chatWindow.style.display === "none" ? "block" : "none";
+    });
 
-// Função para alternar a exibição da interface de chat
-function toggleChatUI() {
-    const chatbotContainer = document.getElementById("chatbotContainer");
-    chatbotContainer.style.display = chatbotContainer.style.display === "none" ? "flex" : "none";
-}
+    closeChat.addEventListener("click", () => {
+        chatWindow.style.display = "none";
+    });
 
-// Função para exibir a resposta do bot
-function displayBotResponse(response) {
-    const chatContainer = document.getElementById("chatContainer");
-    const botMessage = document.createElement("div");
-    botMessage.style.backgroundColor = "#0078d7";
-    botMessage.style.color = "#fff";
-    botMessage.style.padding = "10px";
-    botMessage.style.borderRadius = "10px";
-    botMessage.style.marginBottom = "10px";
-    botMessage.style.alignSelf = "flex-start";
-    botMessage.style.maxWidth = "75%";
-    botMessage.style.fontSize = "14px";
-    botMessage.textContent = response;
-    chatContainer.appendChild(botMessage);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-}
+    // Enviar mensagem
+    sendButton.addEventListener("click", () => {
+        const userMessage = chatInput.value.trim();
+        if (userMessage) {
+            const userMessageElement = document.createElement("p");
+            userMessageElement.textContent = `Você: ${userMessage}`;
+            userMessageElement.style.textAlign = "right";
+            chatBody.appendChild(userMessageElement);
+            chatInput.value = "";
 
-// Função para lidar com o envio de mensagens
-async function handleSendMessage() {
-    const userInput = document.getElementById("userInput");
-    const userMessage = userInput.value.trim();
-
-    if (!userMessage) {
-        return;
-    }
-
-    const chatContainer = document.getElementById("chatContainer");
-    const userMessageElement = document.createElement("div");
-    userMessageElement.style.backgroundColor = "#e1e1e1";
-    userMessageElement.style.color = "#000";
-    userMessageElement.style.padding = "10px";
-    userMessageElement.style.borderRadius = "10px";
-    userMessageElement.style.marginBottom = "10px";
-    userMessageElement.style.alignSelf = "flex-end";
-    userMessageElement.style.maxWidth = "75%";
-    userMessageElement.style.fontSize = "14px";
-    userMessageElement.textContent = userMessage;
-    chatContainer.appendChild(userMessageElement);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    userInput.value = "";
-
-    const botResponse = await sendMessageToBot(userMessage);
-    displayBotResponse(botResponse);
-}
-
-// Inicializar a interface flutuante e o chatbot
-createFloatingChatbox();
-createChatbotUI();
-
-// Adicionar eventos aos elementos
-document.getElementById("sendButton").addEventListener("click", handleSendMessage);
-document.getElementById("userInput").addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-        handleSendMessage();
-    }
+            // Simula a resposta do bot (integre com o backend aqui)
+            setTimeout(() => {
+                const botMessageElement = document.createElement("p");
+                botMessageElement.textContent = `Bot: Esta é uma resposta simulada.`;
+                botMessageElement.style.textAlign = "left";
+                chatBody.appendChild(botMessageElement);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1000);
+        }
+    });
 });
