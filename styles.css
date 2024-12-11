@@ -327,7 +327,7 @@ footer .social-links a:hover {
 .letreiro {
     display: inline-block;
     white-space: nowrap;
-    animation: moveLetreiro 15s linear infinite; /* Ajuste o tempo para controlar a velocidade */
+    animation: moveLetreiro 30s linear infinite; /* Ajuste o tempo para controlar a velocidade */
     font-size: 14px;
     color: #007bff; /* Azul moderno */
     font-weight: bold;
@@ -339,6 +339,6 @@ footer .social-links a:hover {
         transform: translateX(0); /* Começa visível */
     }
     to {
-        transform: translateX(-100%); /* Sai completamente da tela */
+        transform: translateX(-50%); /* Sai completamente da tela */
     }
 }
