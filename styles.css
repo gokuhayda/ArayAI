@@ -323,14 +323,23 @@ footer .social-links a:hover {
     background-color: transparent; /* Transparente ou defina uma cor */
 }
 
+/* Estilo do contêiner do letreiro */
+.letreiro-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 20px;
+    background-color: transparent; /* Transparente ou defina uma cor */
+}
+
 /* Estilo do texto do letreiro */
 .letreiro {
     display: inline-block;
     white-space: nowrap;
     position: absolute;
     animation: moveLetreiro 10s linear infinite;
-    font-size: 14px; /* Tamanho do texto */
-    color: #007bff; /* Cor do texto */
+    font-size: 14px;
+    color: #007bff; /* Azul moderno */
     font-weight: bold;
 }
 
