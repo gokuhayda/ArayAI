@@ -319,24 +319,27 @@ footer .social-links a:hover {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 40px; /* Altura ajustável */
-    background-color: transparent;
+    height: 40px; /* Ajuste conforme necessário */
+    background-color: #0056b3; /* Azul do fundo */
     display: flex;
     align-items: center;
 }
 
-/* Estilo do fluxo de dados */
+/* Estilo do texto do fluxo de dados */
+.letreiro {
+    display: flex;
+    gap: 20px; /* Espaço entre os blocos de dados */
+    animation: moveLetreiro 10s linear infinite;
+}
+
 .fluxo-dados {
-    display: inline-block;
     white-space: nowrap;
     font-size: 16px;
-    color: #007bff; /* Azul moderno */
-    margin-right: 20px; /* Espaço entre os blocos */
-    animation: moveFluxo 10s linear infinite;
+    color: white;
 }
 
 /* Animação do fluxo de dados */
-@keyframes moveFluxo {
+@keyframes moveLetreiro {
     from {
         transform: translateX(100%);
     }
