@@ -313,12 +313,13 @@ footer .social-links a {
 footer .social-links a:hover {
     color: #0056b3;
 }
+
 /* Estilo do contêiner do letreiro */
 .letreiro-container {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 30px; /* Ajuste a altura conforme necessário */
+    height: 30px; /* Ajuste conforme necessário */
     background-color: transparent;
 }
 
@@ -327,21 +328,24 @@ footer .social-links a:hover {
     display: inline-block;
     white-space: nowrap;
     position: absolute;
-    animation: moveLetreiro 10s linear infinite; /* Velocidade ajustável */
+    animation: moveLetreiro 15s linear infinite; /* Duração ajustável */
     font-size: 14px;
     color: #007bff; /* Azul moderno */
     font-weight: bold;
 }
 
-/* Animação do letreiro com espaço extra */
+/* Animação ajustada */
 @keyframes moveLetreiro {
     0% {
         transform: translateX(100%); /* Começa fora da tela à direita */
     }
-    50% {
-        transform: translateX(-50%); /* Centraliza o texto */
+    25% {
+        transform: translateX(0%); /* Texto completamente visível */
+    }
+    75% {
+        transform: translateX(-100%); /* Última letra no centro da tela */
     }
     100% {
-        transform: translateX(-150%); /* Sai da tela à esquerda */
+        transform: translateX(-100%); /* Reinicia o ciclo */
     }
 }
