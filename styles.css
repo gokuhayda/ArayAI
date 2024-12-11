@@ -330,7 +330,7 @@ footer .social-links a:hover {
     display: inline-block;
     white-space: nowrap;
     position: absolute;
-    animation: moveLetreiro 3s linear infinite;
+    animation: moveLetreiro 5s linear infinite;
 }
 
 /* Animação do letreiro */
