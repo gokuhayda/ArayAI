@@ -336,9 +336,9 @@ footer .social-links a:hover {
 /* Animação do letreiro contínuo */
 @keyframes moveLetreiro {
     from {
-        transform: translateX(1%); /* Começa visível */
+        transform: translateX(0); /* Começa visível */
     }
     to {
-        transform: translateX(-25%); /* Sai completamente da tela */
+        transform: translateX(-10%); /* Sai completamente da tela */
     }
 }
