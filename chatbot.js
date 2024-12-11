@@ -78,24 +78,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatInputContainer = document.createElement("div");
     chatInputContainer.style.padding = "10px";
     chatInputContainer.style.borderTop = "1px solid #ccc";
+    chatInputContainer.style.display = "flex";
 
     const chatInput = document.createElement("input");
     chatInput.type = "text";
     chatInput.placeholder = "Digite sua mensagem...";
-    chatInput.style.width = "calc(100% - 50px)";
+    chatInput.style.flex = "1";
     chatInput.style.padding = "5px";
     chatInput.style.marginRight = "10px";
     chatInput.style.border = "1px solid #ccc";
     chatInput.style.borderRadius = "4px";
 
     const sendButton = document.createElement("button");
-    sendButton.textContent = "Enviar";
+    sendButton.textContent = "➤"; // Ícone de envio estilo WhatsApp
     sendButton.style.padding = "5px 10px";
     sendButton.style.backgroundColor = "#007bff";
     sendButton.style.color = "#fff";
     sendButton.style.border = "none";
-    sendButton.style.borderRadius = "4px";
+    sendButton.style.borderRadius = "50%";
     sendButton.style.cursor = "pointer";
+    sendButton.style.fontSize = "16px";
 
     chatInputContainer.appendChild(chatInput);
     chatInputContainer.appendChild(sendButton);
@@ -113,13 +115,14 @@ document.addEventListener("DOMContentLoaded", function () {
         chatWindow.style.display = "none";
     });
 
-    // Enviar mensagem
-    sendButton.addEventListener("click", () => {
+    // Função para enviar mensagem
+    function sendMessage() {
         const userMessage = chatInput.value.trim();
         if (userMessage) {
             const userMessageElement = document.createElement("p");
             userMessageElement.textContent = `Você: ${userMessage}`;
             userMessageElement.style.textAlign = "right";
+            userMessageElement.style.margin = "5px 0";
             chatBody.appendChild(userMessageElement);
             chatInput.value = "";
 
@@ -128,9 +131,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 const botMessageElement = document.createElement("p");
                 botMessageElement.textContent = `Bot: Esta é uma resposta simulada.`;
                 botMessageElement.style.textAlign = "left";
+                botMessageElement.style.margin = "5px 0";
                 chatBody.appendChild(botMessageElement);
                 chatBody.scrollTop = chatBody.scrollHeight;
             }, 1000);
+        }
+    }
+
+    // Evento de clique no botão de envio
+    sendButton.addEventListener("click", sendMessage);
+
+    // Evento para envio ao pressionar Enter
+    chatInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            sendMessage();
         }
     });
 });
