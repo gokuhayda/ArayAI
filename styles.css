@@ -333,15 +333,15 @@ footer .social-links a:hover {
 
 .letreiro ul {
     display: flex;
-    gap: 30px;
+    gap: 50px; /* Espaçamento entre os itens */
     padding: 0;
     margin: 0;
     list-style: none;
-    animation: scroll 5s linear infinite;
+    animation: scroll 30s linear infinite;
 }
 
 .letreiro li {
-    display: inline-block;
+    flex-shrink: 0; /* Impede que os itens sejam redimensionados */
 }
 
 .letreiro li a {
@@ -360,9 +360,9 @@ footer .social-links a:hover {
 /* Animação do letreiro */
 @keyframes scroll {
     from {
-        transform: translateX(0);
+        transform: translateX(100%); /* Começa fora da tela */
     }
     to {
-        transform: translateX(-100%);
+        transform: translateX(-100%); /* Rola até desaparecer */
     }
 }
