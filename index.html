@@ -1,154 +1,200 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TLLSBRLC');</script>
-<!-- End Google Tag Manager -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen Analytics Solutions</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts: Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BFK1J8PF6K"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-BFK1J8PF6K');
-    </script>
-</head>
-<body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLLSBRLC"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <img src="images/DALL·E 2024-12-06 11.46.00 - Design a modern and sleek logo for a company called 'NextGen Analytics Solutions'. The logo should feature abstract and futuristic elements like conne.webp" alt="NextGen Analytics Solutions Logo" class="banner-image"> 
-            <h1>NextGen Analytics Solutions</h1>
-            <p>Transformando dados em estratégias poderosas</p>
-        </div>
-    </header>
-    
-    
-<nav>
-    <div aria-label="breadcrumb">
-      <div class="breadcrumb-mobile">
-       <div class="letreiro-container">
-        <div class="letreiro">
-            <ul>
-                <li><a href="competency_mapping.html">📊 Mapeamento de Competências</a></li>
-                <li><a href="process_optimization.html">⚙️ Otimização de Processos</a></li>
-                <li><a href="data_science_consulting.html">📈 Consultoria em Ciência de Dados</a></li>
-                <li><a href="machine_learning_solutions.html">🤖 Machine Learning</a></li>
-                <li><a href="generative_models.html">🌌 Modelos Generativos</a></li>
-                <li><a href="cases.html">🏆 Cases</a></li>
-                <li><a href="contact.html">📞 Contato</a></li>
-            </ul>
-         </div>
-        </div>
-     </div>
-    </div>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <ul class="menu">
-            <li><a href="index.html">🏠 Início</a></li>
-            <li><a href="competency_mapping.html">📊 Mapeamento de Competências</a></li>
-            <li><a href="process_optimization.html">⚙️ Otimização de Processos</a></li>
-            <li><a href="data_science_consulting.html">📈 Consultoria em Ciência de Dados</a></li>
-            <li><a href="machine_learning_solutions.html">🤖 Machine Learning</a></li>
-            <li><a href="generative_models.html">🌌 Modelos Generativos</a></li>
-            <li><a href="cases.html">🏆 Cases</a></li>
-            <li><a href="contact.html">📞 Contato</a></li>
-        </ul>
-</nav>
+// URL do backend do chatbot no Render
+const backendUrl = "https://chatbot-backend-zduj.onrender.com/api/chat";
 
-<script>
-    function toggleMenu() {
-        const menu = document.querySelector(".menu");
-        menu.classList.toggle("active");
+// Função para enviar mensagem do usuário para o backend
+async function sendMessageToBot(userMessage) {
+    try {
+        const response = await fetch(backendUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user_message: userMessage }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            return data.response;
+        } else {
+            console.error("Erro ao se comunicar com o backend:", response.status);
+            return "Desculpe, não foi possível processar sua solicitação.";
+        }
+    } catch (error) {
+        console.error("Erro de rede:", error);
+        return "Erro ao se comunicar com o servidor. Por favor, tente novamente mais tarde.";
     }
-</script>
-    
-    <!-- Main Content -->
-    <main>
-        <section id="about">
-            <h2>Sobre Nós</h2>
-            <p>
-                Na <strong>NextGen Analytics Solutions</strong>, oferecemos soluções de ponta em ciência de dados e inteligência artificial. Nosso objetivo é simplificar desafios complexos com inovação e eficiência.
-            </p>
-        </section>
+}
 
-        <section id="services">
-            <h2>Serviços</h2>
-            <div class="service-grid">
-                <div class="service">
-                    <h3>📊 Mapeamento de Competências</h3>
-                    <p>Identifique talentos e alinhe habilidades organizacionais.</p>
-                    <a href="competency_mapping.html">Saiba Mais</a>
-                </div>
-                <div class="service">
-                    <h3>⚙️ Otimização de Processos</h3>
-                    <p>Maximize a eficiência operacional com soluções sob medida.</p>
-                    <a href="process_optimization.html">Saiba Mais</a>
-                </div>
-                <div class="service">
-                    <h3>📈 Consultoria em Ciência de Dados</h3>
-                    <p>Transforme dados em insights estratégicos.</p>
-                    <a href="data_science_consulting.html">Saiba Mais</a>
-                </div>
-                <div class="service">
-                    <h3>🤖 Soluções de Machine Learning</h3>
-                    <p>Automatize processos e impulsione a inovação.</p>
-                    <a href="machine_learning_solutions.html">Saiba Mais</a>
-                </div>
-                <div class="service">
-                    <h3>🌌 Modelos Generativos</h3>
-                    <p>Veja como nossas soluções transformaram empresas e impulsionaram resultados.</p>
-                    <a href="generative_models.html">Saiba Mais</a>
-                </div>
-                <div class="service">
-                    <h3>🏆 Cases de Sucesso</h3>
-                    <p>Descubra o poder da inteligência generativa.</p>
-                    <a href="cases.html">Saiba Mais</a>
-                </div>
-            </div>
-        </section>
+// Função para criar a caixinha flutuante
+function createFloatingChatbox() {
+    const chatIconContainer = document.createElement("div");
+    chatIconContainer.id = "chatIconContainer";
+    chatIconContainer.style.position = "fixed";
+    chatIconContainer.style.bottom = "20px";
+    chatIconContainer.style.left = "20px"; // Alinhado à esquerda
+    chatIconContainer.style.width = "60px";
+    chatIconContainer.style.height = "60px";
+    chatIconContainer.style.borderRadius = "50%";
+    chatIconContainer.style.backgroundColor = "#0078d7";
+    chatIconContainer.style.display = "flex";
+    chatIconContainer.style.justifyContent = "center";
+    chatIconContainer.style.alignItems = "center";
+    chatIconContainer.style.cursor = "pointer";
+    chatIconContainer.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
+    chatIconContainer.style.zIndex = "1000";
 
-    <section id="contact">
-        <h2>Contato</h2>
-        <p>
-            Entre em contato conosco para transformar sua empresa com soluções inovadoras.
-            <a href="https://gokuhayda.github.io/nextgen_frontend/contact.html" target="_blank">
-                Clique aqui para saber mais
-            </a>.
-        </p>
-    </section>
+    const chatIcon = document.createElement("img");
+    chatIcon.src = "https://via.placeholder.com/40x40?text=🤖"; // Substitua pelo ícone do robô
+    chatIcon.alt = "Chatbot";
+    chatIcon.style.width = "40px";
+    chatIcon.style.height = "40px";
 
-    </main>
-    <!-- Scripts -->
-    <script src="chatbot.js"></script>
-    
-    <!-- Botão do WhatsApp -->
-    <a href="https://api.whatsapp.com/send?phone=5541995484812&text=Oi, visitei o site e gostaria de saber mais sobre a NextGen Analytics Solutions" id="whatsapp-button" target="_blank" title="Fale Conosco pelo WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-   </a>
+    chatIconContainer.appendChild(chatIcon);
+    document.body.appendChild(chatIconContainer);
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2024 NextGen Analytics Solutions. Todos os direitos reservados.</p>
-        <ul>
-            <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-            <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
-        </ul>
-    </footer>
-</body>
-</html>
+    chatIconContainer.addEventListener("click", toggleChatUI);
+}
+
+// Função para criar a interface de chat
+function createChatbotUI() {
+    const chatbotContainer = document.createElement("div");
+    chatbotContainer.id = "chatbotContainer";
+    chatbotContainer.style.position = "fixed";
+    chatbotContainer.style.bottom = "20px";
+    chatbotContainer.style.left = "20px"; // Alinhado à esquerda
+    chatbotContainer.style.width = "400px";
+    chatbotContainer.style.height = "600px";
+    chatbotContainer.style.border = "2px solid #0078d7";
+    chatbotContainer.style.borderRadius = "10px";
+    chatbotContainer.style.overflow = "hidden";
+    chatbotContainer.style.display = "none";
+    chatbotContainer.style.flexDirection = "column";
+    chatbotContainer.style.backgroundColor = "#f4f4f9";
+    chatbotContainer.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
+    chatbotContainer.style.fontFamily = "Arial, sans-serif";
+    chatbotContainer.style.zIndex = "1000";
+
+    const chatHeader = document.createElement("div");
+    chatHeader.style.backgroundColor = "#0078d7";
+    chatHeader.style.color = "#fff";
+    chatHeader.style.padding = "10px";
+    chatHeader.style.textAlign = "center";
+    chatHeader.style.fontWeight = "bold";
+    chatHeader.textContent = "Chatbot";
+
+    const chatContainer = document.createElement("div");
+    chatContainer.id = "chatContainer";
+    chatContainer.style.flexGrow = "1";
+    chatContainer.style.padding = "10px";
+    chatContainer.style.overflowY = "auto";
+    chatContainer.style.backgroundColor = "#e9ecef";
+
+    const chatInputContainer = document.createElement("div");
+    chatInputContainer.style.display = "flex";
+    chatInputContainer.style.borderTop = "1px solid #ccc";
+    chatInputContainer.style.padding = "10px";
+    chatInputContainer.style.backgroundColor = "#fff";
+
+    const userInput = document.createElement("input");
+    userInput.id = "userInput";
+    userInput.type = "text";
+    userInput.placeholder = "Digite sua mensagem...";
+    userInput.style.flexGrow = "1";
+    userInput.style.border = "1px solid #ccc";
+    userInput.style.borderRadius = "5px";
+    userInput.style.padding = "10px";
+    userInput.style.marginRight = "10px";
+    userInput.style.fontSize = "14px";
+
+    const sendButton = document.createElement("button");
+    sendButton.id = "sendButton";
+    sendButton.textContent = "Enviar";
+    sendButton.style.backgroundColor = "#0078d7";
+    sendButton.style.color = "#fff";
+    sendButton.style.border = "none";
+    sendButton.style.borderRadius = "5px";
+    sendButton.style.padding = "10px 15px";
+    sendButton.style.cursor = "pointer";
+    sendButton.style.fontSize = "14px";
+
+    sendButton.addEventListener("mouseenter", () => {
+        sendButton.style.backgroundColor = "#005bb5";
+    });
+
+    sendButton.addEventListener("mouseleave", () => {
+        sendButton.style.backgroundColor = "#0078d7";
+    });
+
+    chatInputContainer.appendChild(userInput);
+    chatInputContainer.appendChild(sendButton);
+
+    chatbotContainer.appendChild(chatHeader);
+    chatbotContainer.appendChild(chatContainer);
+    chatbotContainer.appendChild(chatInputContainer);
+
+    document.body.appendChild(chatbotContainer);
+}
+
+// Função para alternar a exibição da interface de chat
+function toggleChatUI() {
+    const chatbotContainer = document.getElementById("chatbotContainer");
+    chatbotContainer.style.display = chatbotContainer.style.display === "none" ? "flex" : "none";
+}
+
+// Função para exibir a resposta do bot
+function displayBotResponse(response) {
+    const chatContainer = document.getElementById("chatContainer");
+    const botMessage = document.createElement("div");
+    botMessage.style.backgroundColor = "#0078d7";
+    botMessage.style.color = "#fff";
+    botMessage.style.padding = "10px";
+    botMessage.style.borderRadius = "10px";
+    botMessage.style.marginBottom = "10px";
+    botMessage.style.alignSelf = "flex-start";
+    botMessage.style.maxWidth = "75%";
+    botMessage.style.fontSize = "14px";
+    botMessage.textContent = response;
+    chatContainer.appendChild(botMessage);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// Função para lidar com o envio de mensagens
+async function handleSendMessage() {
+    const userInput = document.getElementById("userInput");
+    const userMessage = userInput.value.trim();
+
+    if (!userMessage) {
+        return;
+    }
+
+    const chatContainer = document.getElementById("chatContainer");
+    const userMessageElement = document.createElement("div");
+    userMessageElement.style.backgroundColor = "#e1e1e1";
+    userMessageElement.style.color = "#000";
+    userMessageElement.style.padding = "10px";
+    userMessageElement.style.borderRadius = "10px";
+    userMessageElement.style.marginBottom = "10px";
+    userMessageElement.style.alignSelf = "flex-end";
+    userMessageElement.style.maxWidth = "75%";
+    userMessageElement.style.fontSize = "14px";
+    userMessageElement.textContent = userMessage;
+    chatContainer.appendChild(userMessageElement);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    userInput.value = "";
+
+    const botResponse = await sendMessageToBot(userMessage);
+    displayBotResponse(botResponse);
+}
+
+// Inicializar a interface flutuante e o chatbot
+createFloatingChatbox();
+createChatbotUI();
+
+// Adicionar eventos aos elementos
+document.getElementById("sendButton").addEventListener("click", handleSendMessage);
+document.getElementById("userInput").addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        handleSendMessage();
+    }
+});
