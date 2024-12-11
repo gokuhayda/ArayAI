@@ -307,7 +307,7 @@ footer .social-links a {
     text-decoration: none;
     color: #007bff;
     font-weight: bold;
-    transition: color 45s ease;
+    transition: color 5s ease;
 }
 
 footer .social-links a:hover {
@@ -337,7 +337,7 @@ footer .social-links a:hover {
     padding: 0;
     margin: 0;
     list-style: none;
-    animation: scroll 4s linear infinite;
+    animation: scroll 30s linear infinite;
 }
 
 .letreiro li {
@@ -360,7 +360,7 @@ footer .social-links a:hover {
 /* Animação do letreiro */
 @keyframes scroll {
     from {
-        transform: translateX(100%); /* Começa fora da tela */
+        transform: translateX(40%); /* Começa fora da tela */
     }
     to {
         transform: translateX(-100%); /* Rola até desaparecer */
