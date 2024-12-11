@@ -57,7 +57,7 @@ header p {
     cursor: pointer;
     background: none;
     border: none;
-    color: #0056b3; /* Cor azul visível */
+    color: white; /* Cor azul visível */
     z-index: 1001;
     transition: color 0.3s ease;
 }
@@ -70,7 +70,7 @@ header p {
     display: none;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f4ff;
+    background-color: #ddd;
     position: fixed;
     top: 50%;
     left: 50%;
