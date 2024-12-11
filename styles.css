@@ -319,14 +319,15 @@ footer .social-links a:hover {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 60px; /* Ajuste conforme necessário */
+    height: 40px; /* Ajuste conforme necessário */
     background-color: transparent;
 }
 
-/* Estilo do dinossauro */
+/* Estilo do texto do dinossauro */
 .dinossauro {
-    height: 40px; /* Altura reduzida */
-    width: auto; /* Mantém a proporção */
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 20px;
     animation: moveDinossauro 5s linear infinite;
 }
 
