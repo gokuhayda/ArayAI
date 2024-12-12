@@ -373,10 +373,9 @@ footer .social-links a:hover {
     overflow-y: scroll; /* Adiciona a barra de rolagem vertical */
     max-height: 300px;  /* Limita a altura máxima do corpo do chat */
     height: 300px;      /* Define uma altura fixa */
-}
-<style>
-  .case-logo {
+
+.case-logo {
     width: 150px; /* Ajuste a largura desejada */
     height: auto; /* Mantém a proporção da altura automaticamente */
   }
-</style>
+
