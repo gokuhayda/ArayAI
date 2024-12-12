@@ -1,7 +1,7 @@
 // const API_URL = 'https://3543-191-177-193-123.ngrok-free.app/chat';
 const API_URL =  'https://chatbot-backend-zduj.onrender.com';
 document.addEventListener("DOMContentLoaded", () => {
-    // Criação de elementos com atributos e estilos personalizados
+    // Função auxiliar para criar elementos com atributos e estilos personalizados
     const createElement = (type, attributes = {}, styles = {}, innerHTML = "") => {
         const element = document.createElement(type);
         Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
@@ -10,11 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return element;
     };
 
-    chatbotButton.addEventListener("click", () => {
-    console.log("Botão clicado. Estado atual:", chatWindow.style.display);
-    chatWindow.style.display = chatWindow.style.display === "none" ? "block" : "none";
-});
-
     // Criação do botão flutuante
     const chatbotButton = createElement("div", { id: "chatbot-button" }, {
         position: "fixed", left: "20px", bottom: "20px", width: "60px", height: "60px",
@@ -22,15 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: "9999",
     });
 
-    // Botão para abrir/fechar o chat
-chatbotButton.addEventListener("click", () => {
-    chatWindow.style.display = chatWindow.style.display === "none" ? "block" : "none";
-});
-
-// Botão para fechar diretamente o chat
-closeChat.addEventListener("click", () => {
-    chatWindow.style.display = "none";
-});
     const chatbotIcon = createElement("img", {
         src: "https://cdn-icons-png.flaticon.com/512/4712/4712027.png",
         alt: "Chatbot",
@@ -39,20 +25,12 @@ closeChat.addEventListener("click", () => {
     document.body.appendChild(chatbotButton);
 
     // Criação da janela de chat
-const chatWindow = createElement("div", { id: "chat-window" }, {
-    position: "fixed",
-    left: "20px",
-    bottom: "90px",
-    width: "300px",
-    height: "400px",
-    backgroundColor: "#fff",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-    display: "none", // Garante que o chat inicia minimizado
-    zIndex: "9999",
-    flexDirection: "column",
-});
+    const chatWindow = createElement("div", { id: "chat-window" }, {
+        position: "fixed", left: "20px", bottom: "90px", width: "300px", height: "400px",
+        backgroundColor: "#fff", border: "1px solid #ccc", borderRadius: "8px",
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", display: "none", // Inicialmente escondido
+        zIndex: "9999", flexDirection: "column",
+    });
 
     const chatHeader = createElement("div", {}, {
         backgroundColor: "#007bff", color: "#fff", padding: "10px", display: "flex",
@@ -83,7 +61,7 @@ const chatWindow = createElement("div", { id: "chat-window" }, {
 
     document.body.appendChild(chatWindow);
 
-    // Lógica de abertura e fechamento
+    // Lógica de abertura e fechamento do chat
     chatbotButton.addEventListener("click", () => {
         chatWindow.style.display = chatWindow.style.display === "none" ? "block" : "none";
     });
@@ -107,38 +85,31 @@ const chatWindow = createElement("div", { id: "chat-window" }, {
             displayMessage("Por favor, insira uma mensagem.", "left", "red");
             return;
         }
-    
+
         displayMessage(userMessage, "right", "#007bff");
         chatInput.value = "";
-    
+
         try {
-            console.log("Enviando mensagem para a API:", userMessage);
-            const response = await fetch(API_URL, {
+            const response = await fetch('https://chatbot-backend-zduj.onrender.com', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_message: userMessage }),
             });
-    
-            console.log("Resposta recebida:", response);
-    
+
             if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
-    
+
             const data = await response.json();
-            console.log("Dados da resposta:", data);
-    
             if (data?.response) {
                 displayMessage(data.response, "left", "#333");
             } else {
                 displayMessage("Erro: Resposta inválida do servidor.", "left", "red");
             }
         } catch (error) {
-            console.error("Erro ao se comunicar com o backend:", error);
             displayMessage(`Erro ao processar sua mensagem: ${error.message}`, "left", "red");
         }
     };
 
     sendButton.addEventListener("click", sendMessage);
-
     chatInput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") sendMessage();
     });
