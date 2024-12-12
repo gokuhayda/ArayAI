@@ -1,5 +1,5 @@
 // const API_URL = 'https://3543-191-177-193-123.ngrok-free.app/chat';
-const API_URL =  'https://chatbot-backend-zduj.onrender.com';
+const API_URL =  https://chatbot-backend-zduj.onrender.com
 document.addEventListener("DOMContentLoaded", () => {
     // Criação de elementos com atributos e estilos personalizados
     const createElement = (type, attributes = {}, styles = {}, innerHTML = "") => {
@@ -17,15 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: "9999",
     });
 
-    // Botão para abrir/fechar o chat
-chatbotButton.addEventListener("click", () => {
-    chatWindow.style.display = chatWindow.style.display === "none" ? "block" : "none";
-});
-
-// Botão para fechar diretamente o chat
-closeChat.addEventListener("click", () => {
-    chatWindow.style.display = "none";
-});
     const chatbotIcon = createElement("img", {
         src: "https://cdn-icons-png.flaticon.com/512/4712/4712027.png",
         alt: "Chatbot",
@@ -34,20 +25,12 @@ closeChat.addEventListener("click", () => {
     document.body.appendChild(chatbotButton);
 
     // Criação da janela de chat
-const chatWindow = createElement("div", { id: "chat-window" }, {
-    position: "fixed",
-    left: "20px",
-    bottom: "90px",
-    width: "300px",
-    height: "400px",
-    backgroundColor: "#fff",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-    display: "none", // Garante que o chat inicia minimizado
-    zIndex: "9999",
-    flexDirection: "column",
-});
+    const chatWindow = createElement("div", { id: "chat-window" }, {
+        position: "fixed", left: "20px", bottom: "90px", width: "300px", height: "400px",
+        backgroundColor: "#fff", border: "1px solid #ccc", borderRadius: "8px",
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", display: "none", zIndex: "9999",
+        display: "flex", flexDirection: "column",
+    });
 
     const chatHeader = createElement("div", {}, {
         backgroundColor: "#007bff", color: "#fff", padding: "10px", display: "flex",
