@@ -1,7 +1,7 @@
 // const API_URL = 'https://3543-191-177-193-123.ngrok-free.app/chat';
 const API_URL =  'https://chatbot-backend-zduj.onrender.com';
 document.addEventListener("DOMContentLoaded", () => {
-    // Função auxiliar para criar elementos com atributos e estilos personalizados
+    // Criação de elementos com atributos e estilos personalizados
     const createElement = (type, attributes = {}, styles = {}, innerHTML = "") => {
         const element = document.createElement(type);
         Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const chatWindow = createElement("div", { id: "chat-window" }, {
         position: "fixed", left: "20px", bottom: "90px", width: "300px", height: "400px",
         backgroundColor: "#fff", border: "1px solid #ccc", borderRadius: "8px",
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", display: "none", // Inicialmente escondido
-        zIndex: "9999", flexDirection: "column",
+        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", display: "none", zIndex: "9999",
+        display: "flex", flexDirection: "column",
     });
 
     const chatHeader = createElement("div", {}, {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         justifyContent: "space-between", alignItems: "center", borderTopLeftRadius: "8px", borderTopRightRadius: "8px",
     });
     const chatTitle = createElement("span", {}, {}, "Assistente Virtual");
-    const closeChat = createElement("span", { id: "close-chat" }, { cursor: "pointer" }, "✖");
+    const closeChat = createElement("span", {}, { cursor: "pointer" }, "✖");
     chatHeader.append(chatTitle, closeChat);
     chatWindow.appendChild(chatHeader);
 
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.appendChild(chatWindow);
 
-    // Lógica de abertura e fechamento do chat
+    // Lógica de abertura e fechamento
     chatbotButton.addEventListener("click", () => {
         chatWindow.style.display = chatWindow.style.display === "none" ? "block" : "none";
     });
@@ -85,31 +85,38 @@ document.addEventListener("DOMContentLoaded", () => {
             displayMessage("Por favor, insira uma mensagem.", "left", "red");
             return;
         }
-
+    
         displayMessage(userMessage, "right", "#007bff");
         chatInput.value = "";
-
+    
         try {
-            const response = await fetch('https://chatbot-backend-zduj.onrender.com', {
+            console.log("Enviando mensagem para a API:", userMessage);
+            const response = await fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_message: userMessage }),
             });
-
+    
+            console.log("Resposta recebida:", response);
+    
             if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
-
+    
             const data = await response.json();
+            console.log("Dados da resposta:", data);
+    
             if (data?.response) {
                 displayMessage(data.response, "left", "#333");
             } else {
                 displayMessage("Erro: Resposta inválida do servidor.", "left", "red");
             }
         } catch (error) {
+            console.error("Erro ao se comunicar com o backend:", error);
             displayMessage(`Erro ao processar sua mensagem: ${error.message}`, "left", "red");
         }
     };
 
     sendButton.addEventListener("click", sendMessage);
+
     chatInput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") sendMessage();
     });
