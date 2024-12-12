@@ -1,3 +1,5 @@
+const API_URL = 'https://b67d-191-177-193-123.ngrok-free.app';
+
 document.addEventListener("DOMContentLoaded", function () {
     // Cria o botão flutuante para o chatbot
     const chatbotButton = document.createElement("div");
@@ -148,3 +150,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+
+async function sendMessageToAPI(data) {
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error communicating with API:", error);
+        throw error;
+    }
+}
