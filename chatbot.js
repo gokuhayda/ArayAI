@@ -199,11 +199,18 @@ async function handleUserMessage(userMessage) {
         // Remove loading indicator
         chatContainer.removeChild(loadingIndicator);
 
-        // Add bot's response to the chat
-        const botMessageElement = document.createElement("div");
-        botMessageElement.className = "chat-message bot";
-        botMessageElement.innerText = response.reply || "Desculpe, não consegui entender.";
-        chatContainer.appendChild(botMessageElement);
+        // Only display the API's response, nothing simulated
+        if (response && response.reply) {
+            const botMessageElement = document.createElement("div");
+            botMessageElement.className = "chat-message bot";
+            botMessageElement.innerText = response.reply;
+            chatContainer.appendChild(botMessageElement);
+        } else {
+            const noResponseElement = document.createElement("div");
+            noResponseElement.className = "chat-message bot";
+            noResponseElement.innerText = "Nenhuma resposta recebida do servidor.";
+            chatContainer.appendChild(noResponseElement);
+        }
 
     } catch (error) {
         // Handle errors and remove loading indicator
