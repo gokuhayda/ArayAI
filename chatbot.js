@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return element;
     };
 
+    chatbotButton.addEventListener("click", () => {
+    console.log("Botão clicado. Estado atual:", chatWindow.style.display);
+    chatWindow.style.display = chatWindow.style.display === "none" ? "block" : "none";
+});
+
     // Criação do botão flutuante
     const chatbotButton = createElement("div", { id: "chatbot-button" }, {
         position: "fixed", left: "20px", bottom: "20px", width: "60px", height: "60px",
