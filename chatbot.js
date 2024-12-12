@@ -43,11 +43,13 @@ async function sendMessage() {
     const userMessageElement = document.createElement("p");
     userMessageElement.textContent = userMessage;
     userMessageElement.style.textAlign = "right";
+    userMessageElement.style.color = "#007bff";
     chatBody.appendChild(userMessageElement);
+
     chatInput.value = "";
 
     try {
-        console.log("Enviando mensagem:", userMessage);
+        console.log("Enviando mensagem:", userMessage); // Log para depuração
         const response = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -59,12 +61,13 @@ async function sendMessage() {
         }
 
         const data = await response.json();
-        console.log("Resposta recebida:", data);
+        console.log("Resposta recebida:", data); // Log para depuração
 
         if (data && data.response) {
             const botMessageElement = document.createElement("p");
             botMessageElement.textContent = data.response;
             botMessageElement.style.textAlign = "left";
+            botMessageElement.style.color = "#333";
             chatBody.appendChild(botMessageElement);
         } else {
             const errorMessageElement = document.createElement("p");
@@ -80,6 +83,6 @@ async function sendMessage() {
         chatBody.appendChild(errorMessageElement);
     }
 
-    chatBody.scrollTop = chatBody.scrollHeight;
+    chatBody.scrollTop = chatBody.scrollHeight; // Garante que a rolagem fique no final
 }
 
