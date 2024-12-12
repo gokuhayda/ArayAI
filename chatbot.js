@@ -1,4 +1,4 @@
-API_URL = 'https://3543-191-177-193-123.ngrok-free.app/chat';
+const API_URL = 'https://3543-191-177-193-123.ngrok-free.app/chat';
 
 document.addEventListener("DOMContentLoaded", function () {
     // Cria o botão flutuante para o chatbot
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     chatBody.style.overflowY = "scroll"; // Adiciona a barra de rolagem vertical
     chatBody.style.maxHeight = "300px"; // Define a altura máxima para o conteúdo rolável
     chatBody.style.height = "300px";
-    chatBody.innerHTML = <p>Bem-vindo! Como posso ajudá-lo?</p>;
+    chatBody.innerHTML = `<p>Bem-vindo! Como posso ajudá-lo?</p>`;
     chatWindow.appendChild(chatBody);
 
     // Campo de entrada
@@ -117,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
     closeChat.addEventListener("click", () => {
         chatWindow.style.display = "none";
     });
-
 
 async function sendMessage() {
     const userMessage = chatInput.value.trim();
