@@ -366,130 +366,38 @@ footer .social-links a:hover {
         transform: translateX(-100%); /* Rola até desaparecer */
     }
 }
-/* Botão flutuante */
-
-#chatbot-button {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  width: 60px;
-  height: 60px;
-  display: flex; /* Deve garantir que seja visível */
-}
-
-#chatbot-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-#chatbot-button img {
-  width: 40px;
-  height: 40px;
-}
-
-/* Janela de chat */
-#chat-window {
-  position: fixed;
-  left: 20px;
-  bottom: 90px;
-  width: 350px;
-  height: 500px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  display: none;
-  flex-direction: column;
-  z-index: 9999;
-  overflow: hidden;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-#chat-window.show {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-#chat-window.hide {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-/* Cabeçalho da janela */
-#chat-window div:first-child {
-  background-color: #007bff;
-  color: #fff;
-  padding: 15px;
-  font-size: 16px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-#chat-window div:first-child span:last-child {
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-}
-
+/* Corpo do chat */
 /* Corpo do chat */
 #chat-body {
-  flex: 1;
-  padding: 15px;
-  overflow-y: auto;
-  background-color: #f9f9f9;
+    flex: 1; /* Adapta-se ao espaço disponível no contêiner pai */
+    padding: 10px; /* Espaçamento interno */
+    overflow-y: auto; /* Exibe barra de rolagem vertical apenas quando necessário */
+    max-height: 300px; /* Limita a altura máxima do corpo do chat */
+    border-top: 1px solid #ccc; /* Linha sutil para separar o cabeçalho */
+    background-color: #f9f9f9; /* Cor de fundo suave */
+    font-family: Arial, sans-serif; /* Tipografia limpa */
+    font-size: 14px; /* Tamanho do texto */
+    line-height: 1.5; /* Melhor legibilidade */
 }
 
-#chat-body p {
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 14px;
-  line-height: 1.4;
+/* Personalização da barra de rolagem */
+#chat-body::-webkit-scrollbar {
+    width: 8px; /* Largura da barra */
 }
 
-#chat-body p:nth-child(even) {
-  background-color: #e9ecef;
+#chat-body::-webkit-scrollbar-thumb {
+    background: #007bff; /* Cor do "polegar" da barra */
+    border-radius: 4px; /* Cantos arredondados */
 }
 
-#chat-body p:nth-child(odd) {
-  background-color: #d4edda;
-  color: #155724;
-  align-self: flex-end;
+#chat-body::-webkit-scrollbar-thumb:hover {
+    background: #0056b3; /* Cor ao passar o mouse */
 }
 
-/* Input e botão de envio */
-#chat-window div:last-child {
-  display: flex;
-  padding: 10px;
-  background-color: #f1f1f1;
-  border-top: 1px solid #ccc;
+#chat-body::-webkit-scrollbar-track {
+    background: #e9e9e9; /* Cor do trilho da barra */
 }
-
-#chat-window input[type="text"] {
-  flex: 1;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-
-#chat-window button {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-#chat-window button:hover {
-  background-color: #0056b3;
+.case-logo {
+    width: 150px; /* Ajuste a largura desejada */
+    height: auto; /* Mantém a proporção da altura automaticamente */
     }
