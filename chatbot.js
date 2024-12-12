@@ -171,3 +171,50 @@ async function sendMessageToAPI(data) {
         throw error;
     }
 }
+
+
+
+async function handleUserMessage(userMessage) {
+    const chatContainer = document.getElementById("chat-container");
+    
+    // Add user's message to the chat
+    const userMessageElement = document.createElement("div");
+    userMessageElement.className = "chat-message user";
+    userMessageElement.innerText = userMessage;
+    chatContainer.appendChild(userMessageElement);
+
+    // Add loading indicator
+    const loadingIndicator = document.createElement("div");
+    loadingIndicator.className = "chat-message loading";
+    loadingIndicator.innerText = "Carregando...";
+    chatContainer.appendChild(loadingIndicator);
+
+    // Scroll to the bottom of the chat
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    try {
+        // Send the message to the API and wait for the response
+        const response = await sendMessageToAPI({ message: userMessage });
+        
+        // Remove loading indicator
+        chatContainer.removeChild(loadingIndicator);
+
+        // Add bot's response to the chat
+        const botMessageElement = document.createElement("div");
+        botMessageElement.className = "chat-message bot";
+        botMessageElement.innerText = response.reply || "Desculpe, não consegui entender.";
+        chatContainer.appendChild(botMessageElement);
+
+    } catch (error) {
+        // Handle errors and remove loading indicator
+        chatContainer.removeChild(loadingIndicator);
+        
+        const errorMessageElement = document.createElement("div");
+        errorMessageElement.className = "chat-message bot";
+        errorMessageElement.innerText = "Erro ao conectar com o servidor. Tente novamente mais tarde.";
+        chatContainer.appendChild(errorMessageElement);
+    }
+
+    // Scroll to the bottom of the chat
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
