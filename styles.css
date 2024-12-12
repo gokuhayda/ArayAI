@@ -390,6 +390,9 @@ footer .social-links a:hover {
     border-radius: 4px; /* Cantos arredondados */
 }
 
+#chat-window {
+    display: none !important;
+}
 #chat-body::-webkit-scrollbar-thumb:hover {
     background: #0056b3; /* Cor ao passar o mouse */
 }
