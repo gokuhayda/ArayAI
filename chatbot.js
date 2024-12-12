@@ -1,5 +1,5 @@
 // const API_URL = 'https://3543-191-177-193-123.ngrok-free.app/chat';
-const API_URL =  https://chatbot-backend-zduj.onrender.com
+const API_URL =  'https://chatbot-backend-zduj.onrender.com';
 document.addEventListener("DOMContentLoaded", () => {
     // Criação de elementos com atributos e estilos personalizados
     const createElement = (type, attributes = {}, styles = {}, innerHTML = "") => {
