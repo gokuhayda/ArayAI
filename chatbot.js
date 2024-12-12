@@ -85,21 +85,25 @@ document.addEventListener("DOMContentLoaded", () => {
             displayMessage("Por favor, insira uma mensagem.", "left", "red");
             return;
         }
-
+    
         displayMessage(userMessage, "right", "#007bff");
         chatInput.value = "";
-
+    
         try {
+            console.log("Enviando mensagem para a API:", userMessage);
             const response = await fetch(API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_message: userMessage }),
             });
-
+    
+            console.log("Resposta recebida:", response);
+    
             if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
-
+    
             const data = await response.json();
-
+            console.log("Dados da resposta:", data);
+    
             if (data?.response) {
                 displayMessage(data.response, "left", "#333");
             } else {
@@ -107,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } catch (error) {
             console.error("Erro ao se comunicar com o backend:", error);
-            displayMessage("Erro ao processar sua mensagem.", "left", "red");
+            displayMessage(`Erro ao processar sua mensagem: ${error.message}`, "left", "red");
         }
     };
 
