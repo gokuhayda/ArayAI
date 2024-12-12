@@ -1,4 +1,3 @@
-
 const API_URL = 'https://3543-191-177-193-123.ngrok-free.app/chat';
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -72,7 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatBody = document.createElement("div");
     chatBody.style.flex = "1";
     chatBody.style.padding = "10px";
-    chatBody.style.overflowY = "auto";
+    chatBody.style.overflowY = "scroll"; // Adiciona a barra de rolagem vertical
+    chatBody.style.maxHeight = "300px"; // Define a altura máxima para o conteúdo rolável
     chatBody.style.height = "300px";
     chatBody.innerHTML = `<p>Bem-vindo! Como posso ajudá-lo?</p>`;
     chatWindow.appendChild(chatBody);
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
             chatBody.appendChild(errorMessageElement);
         }
 
-        chatBody.scrollTop = chatBody.scrollHeight;
+        chatBody.scrollTop = chatBody.scrollHeight; // Garante que a rolagem fique no final
     }
 
     sendButton.addEventListener("click", sendMessage);
