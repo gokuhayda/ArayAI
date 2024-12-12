@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         justifyContent: "space-between", alignItems: "center", borderTopLeftRadius: "8px", borderTopRightRadius: "8px",
     });
     const chatTitle = createElement("span", {}, {}, "Assistente Virtual");
-    const closeChat = createElement("span", {}, { cursor: "pointer" }, "✖");
+    const closeChat = createElement("span", { id: "close-chat" }, { cursor: "pointer" }, "✖");
     chatHeader.append(chatTitle, closeChat);
     chatWindow.appendChild(chatHeader);
 
