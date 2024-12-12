@@ -130,11 +130,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const userMessageElement = document.createElement("p");
         userMessageElement.textContent = userMessage;
         userMessageElement.style.textAlign = "right";
+        userMessageElement.style.color = "#007bff";
         chatBody.appendChild(userMessageElement);
 
         chatInput.value = "";
 
         try {
+            console.log("Enviando mensagem:", userMessage); // Log para depuração
             const response = await fetch(API_URL, {
                 method: "POST",
                 headers: {
@@ -148,13 +150,25 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const data = await response.json();
-            const botMessageElement = document.createElement("p");
-            botMessageElement.textContent = data.response;
-            chatBody.appendChild(botMessageElement);
+            console.log("Resposta recebida:", data); // Log para depuração
+
+            if (data && data.response) {
+                const botMessageElement = document.createElement("p");
+                botMessageElement.textContent = data.response;
+                botMessageElement.style.textAlign = "left";
+                botMessageElement.style.color = "#333";
+                chatBody.appendChild(botMessageElement);
+            } else {
+                const errorMessageElement = document.createElement("p");
+                errorMessageElement.textContent = "Erro: Resposta inválida do servidor.";
+                errorMessageElement.style.color = "red";
+                chatBody.appendChild(errorMessageElement);
+            }
         } catch (error) {
             console.error("Erro ao se comunicar com o backend:", error);
             const errorMessageElement = document.createElement("p");
             errorMessageElement.textContent = "Erro ao processar sua mensagem.";
+            errorMessageElement.style.color = "red";
             chatBody.appendChild(errorMessageElement);
         }
 
