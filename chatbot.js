@@ -1,3 +1,4 @@
+
 const API_URL = 'https://3543-191-177-193-123.ngrok-free.app/chat';
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     chatbotButton.style.display = "flex";
     chatbotButton.style.alignItems = "center";
     chatbotButton.style.justifyContent = "center";
-    chatbotButton.style.zIndex = "1000";
+    chatbotButton.style.zIndex = "9999";
 
     // Ícone do robô no botão
     const chatbotIcon = document.createElement("img");
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     chatWindow.style.borderRadius = "8px";
     chatWindow.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)";
     chatWindow.style.display = "none";
-    chatWindow.style.zIndex = "1000";
+    chatWindow.style.zIndex = "9999";
 
     // Cabeçalho do chat
     const chatHeader = document.createElement("div");
