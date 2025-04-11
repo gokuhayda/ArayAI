@@ -1,136 +1,121 @@
-const API_URL = 'https://cfc2-2804-7f0-8417-8046-dc9d-a7c-ad6e-1279.ngrok-free.app/chat';
-let sessionId = null;
+import os
+import logging
+import random
+from difflib import get_close_matches
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from dotenv import load_dotenv
 
-document.addEventListener("DOMContentLoaded", function () {
-    const chatbotButton = document.createElement("div");
-    chatbotButton.id = "chatbot-button";
-    chatbotButton.style = `
-        position: fixed; left: 20px; bottom: 20px; width: 60px; height: 60px;
-        border-radius: 50%; background-color: #007bff; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 1000;
-    `;
+# Imports do projeto
+from sessions_manager import save_conversation, create_session, load_session_history, enqueue_message, is_processing, set_processing, get_next_message
+from indexing import create_index
+from data_ingestion import scrape_web_pages, process_documents
+from chat_history_manager import manage_history
+from utils_tools.config_loader import load_config
+from core.query_router import FAQQueryRouter
 
-    const chatbotIcon = document.createElement("img");
-    chatbotIcon.src = "https://cdn-icons-png.flaticon.com/512/4712/4712027.png";
-    chatbotIcon.alt = "Chatbot";
-    chatbotIcon.style = "width: 40px; height: 40px;";
-    chatbotButton.appendChild(chatbotIcon);
-    document.body.appendChild(chatbotButton);
+def is_saudacao(msg, lista_salutations, threshold=0.8):
+    msg_clean = msg.strip().lower()
+    match = get_close_matches(msg_clean, lista_salutations, n=1, cutoff=threshold)
+    return bool(match)
 
-    const chatWindow = document.createElement("div");
-    chatWindow.id = "chat-window";
-    chatWindow.style = `
-        position: fixed; left: 20px; bottom: 90px; width: 300px; height: 400px;
-        background-color: #fff; border: 1px solid #ccc; border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: none; z-index: 1000;
-        display: flex; flex-direction: column;
-    `;
+# Configuração de logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
 
-    const chatHeader = document.createElement("div");
-    chatHeader.style = `
-        background-color: #007bff; color: #fff; padding: 10px;
-        border-top-left-radius: 8px; border-top-right-radius: 8px;
-        display: flex; justify-content: space-between; align-items: center;
-    `;
+# Carregar variáveis do .env
+load_dotenv()
 
-    const chatTitle = document.createElement("span");
-    chatTitle.textContent = "Assistente Virtual";
-    chatTitle.style.fontWeight = "bold";
+# Carregar configuração do YAML
+try:
+    CONFIG_PATH = load_config()
+except Exception as e:
+    logger.error(f"Erro ao carregar o arquivo de configuração: {e}")
+    exit(1)
 
-    const closeChat = document.createElement("span");
-    closeChat.textContent = "✖";
-    closeChat.style.cursor = "pointer";
+# Caminhos e mensagens
+SESSIONS_PATH = CONFIG_PATH['storage']['sessions_path']
+CONVERSATIONS_PATH = CONFIG_PATH['storage']['conversations_path']
+NOTIFICATION_WARNING = CONFIG_PATH['notification_warning_bot']
+WELCOME_MESSAGES = CONFIG_PATH['welcome_messages']
+SALUTATIONS = CONFIG_PATH['salutations']
+REFORCO = CONFIG_PATH["messages"].get("prompt_reforco", "")
 
-    chatHeader.appendChild(chatTitle);
-    chatHeader.appendChild(closeChat);
-    chatWindow.appendChild(chatHeader);
+# App Flask
+app = Flask(__name__, template_folder="../templates")
+CORS(app, resources={r"/*": {"origins": "https://gokuhayda.github.io"}})
 
-    const chatBody = document.createElement("div");
-    chatBody.style = `
-        flex: 1; padding: 10px; overflow-y: auto; height: 300px;
-    `;
-    chatBody.innerHTML = `<p>Bem-vindo! Como posso ajudá-lo?</p>`;
-    chatWindow.appendChild(chatBody);
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "https://gokuhayda.github.io"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    return response
 
-    const chatInputContainer = document.createElement("div");
-    chatInputContainer.style = `
-        padding: 10px; border-top: 1px solid #ccc; display: flex;
-    `;
+# Pré-processamento
+try:
+    logger.info("Iniciando processamento de dados e criação do índice...")
+    process_documents(CONFIG_PATH)
+    scrape_web_pages(CONFIG_PATH)
+    index = create_index(CONFIG_PATH)
+    logger.info("Processamento de dados e criação do índice concluídos com sucesso.")
+except Exception as e:
+    logger.error(f"Erro no processamento inicial: {e}")
+    exit(1)
 
-    const chatInput = document.createElement("input");
-    chatInput.type = "text";
-    chatInput.placeholder = "Digite sua mensagem...";
-    chatInput.style = `
-        flex: 1; padding: 5px; margin-right: 10px;
-        border: 1px solid #ccc; border-radius: 4px;
-    `;
+router = FAQQueryRouter(index)
 
-    const sendButton = document.createElement("button");
-    sendButton.textContent = "➤";
-    sendButton.style = `
-        padding: 5px 10px; background-color: #007bff; color: #fff;
-        border: none; border-radius: 50%; cursor: pointer; font-size: 16px;
-    `;
+@app.route("/chat", methods=["POST", "OPTIONS"])
+def chat_alternative():
+    try:
+        if request.method == "OPTIONS":
+            return jsonify({"message": "CORS preflight successful"}), 200
 
-    chatInputContainer.appendChild(chatInput);
-    chatInputContainer.appendChild(sendButton);
-    chatWindow.appendChild(chatInputContainer);
-    document.body.appendChild(chatWindow);
+        if not request.is_json:
+            logger.warning("Requisição inválida: não é um JSON.")
+            return jsonify({"error": "Requisição inválida. Esperado JSON."}), 400
 
-    chatbotButton.addEventListener("click", () => {
-        chatWindow.style.display = chatWindow.style.display === "none" ? "block" : "none";
-    });
+        data = request.json
+        user_message = data.get("user_message", "").strip()
+        session_id = data.get("session_id", create_session(SESSIONS_PATH))
 
-    closeChat.addEventListener("click", () => {
-        chatWindow.style.display = "none";
-    });
+        logger.info(f"Mensagem recebida: {user_message}, Session ID: {session_id}")
 
-    async function sendMessage() {
-        const userMessage = chatInput.value.trim();
-        if (!userMessage) {
-            alert("Por favor, insira uma mensagem.");
-            return;
-        }
+        if not user_message:
+            logger.warning("Mensagem do usuário não fornecida.")
+            return jsonify({"error": "Mensagem não fornecida."}), 400
 
-        const userMessageElement = document.createElement("p");
-        userMessageElement.textContent = userMessage;
-        userMessageElement.style.textAlign = "right";
-        chatBody.appendChild(userMessageElement);
-        chatInput.value = "";
+        if is_processing(session_id):
+            return jsonify({"response": "Aguarde, estou processando sua pergunta anterior..."})
 
-        try {
-            console.log("🔁 Enviando para API:", API_URL);
-            const response = await fetch(API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    user_message: userMessage,
-                    session_id: sessionId
-                }),
-            });
+        set_processing(session_id, True)
 
-            if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
+        if is_saudacao(user_message, SALUTATIONS):
+            response = random.choice(WELCOME_MESSAGES)
+        else:
+            user_message = f"{user_message}{REFORCO}"
+            response = router.responder(user_message)
 
-            const data = await response.json();
-            sessionId = data.session_id;
+        set_processing(session_id, False)
 
-            const botMessageElement = document.createElement("p");
-            botMessageElement.textContent = data.response;
-            chatBody.appendChild(botMessageElement);
-        } catch (error) {
-            console.error("❌ Erro ao se comunicar com o backend:", error);
-            const errorMessageElement = document.createElement("p");
-            errorMessageElement.textContent = "Erro ao processar sua mensagem.";
-            chatBody.appendChild(errorMessageElement);
-        }
+        save_conversation(session_id, user_message, response, SESSIONS_PATH, CONVERSATIONS_PATH)
+        session_history = load_session_history(session_id, SESSIONS_PATH)
+        session_history = manage_history(session_history, user_message, response, token_limit=1000, summary_percentage=0.5)
 
-        chatBody.scrollTop = chatBody.scrollHeight;
-    }
+        logger.info(f"Resposta gerada: {response}")
+        return jsonify({"session_id": session_id, "response": str(response)}), 200
 
-    sendButton.addEventListener("click", sendMessage);
-    chatInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            sendMessage();
-        }
-    });
-});
+    except Exception as e:
+        logger.exception("Erro no processamento do chatbot")
+        return jsonify({"error": "Erro ao processar a consulta. Verifique os logs para mais detalhes."}), 500
+
+# ✅ Rota base para lidar com OPTIONS / e GET /
+@app.route("/", methods=["GET", "OPTIONS"])
+def root():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight OK"}), 200
+    return jsonify({"message": "API do chatbot está online"}), 200
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
