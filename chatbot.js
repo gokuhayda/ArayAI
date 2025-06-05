@@ -1,4 +1,4 @@
-const API_URL = 'https://f997-2804-7f0-90c0-5cca-e8e2-6693-19c8-d87.ngrok-free.app/chat';
+const API_URL = 'https://361e-2804-868-d041-c56b-88d8-1a83-f28d-b94f.ngrok-free.app/chat';
 
 document.addEventListener("DOMContentLoaded", function () {
     // Cria o botão flutuante para o chatbot
