@@ -1,0 +1,31 @@
+{
+  "gpt-4o": {
+    "prompt": 0.005,
+    "completion": 0.015,
+    "moeda": "USD",
+    "fonte": "https://openai.com/pricing"
+  },
+  "gpt-4-0125-preview": {
+    "prompt": 0.01,
+    "completion": 0.03,
+    "moeda": "USD",
+    "fonte": "https://openai.com/pricing"
+  },
+  "gpt-4-1106-preview": {
+    "prompt": 0.01,
+    "completion": 0.03,
+    "moeda": "USD",
+    "fonte": "https://openai.com/pricing"
+  },
+  "gpt-3.5-turbo": {
+    "prompt": 0.0005,
+    "completion": 0.0015,
+    "moeda": "USD",
+    "fonte": "https://openai.com/pricing"
+  },
+  "whisper-1": {
+    "audio_minuto": 0.006,
+    "moeda": "USD",
+    "fonte": "https://openai.com/pricing"
+  }
+}
